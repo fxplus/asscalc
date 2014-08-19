@@ -37,15 +37,16 @@
       startingDay: 1
     };
     if ( $scope.datetype == 'start' ) { $scope.today(); $scope.$parent.startdate = $scope.dt;}
-    else { $scope.nweeks(4); }
+    else { $scope.nweeks(4); $scope.$parent.enddate = $scope.dt;}
+
     // $scope.initDate = new Date('2016-15-20');
     $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
     $scope.format = $scope.formats[0];
   });
   
   app.controller("ScheduleCtrl", function () {
-    this.startdate = false;
-    this.enddate = true;
+    this.startdate = null;
+    this.enddate = null;
     this.datescollected = false;
     this.createschedule = function() {
       console.log('create a schedule');

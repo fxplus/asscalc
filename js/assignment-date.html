@@ -4,14 +4,14 @@
   <div class="row">
       <div class="col-md-6">
           <p class="input-group">
-            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-change="updateSchedule()"/>
+            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-change="updateSchedule()" novalidate required/>
             <span class="input-group-btn">
               <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
           </p>
       </div>
   </div>
-  <hr />
+  <hr/>
   <button type="button" class="btn btn-sm btn-info" ng-show="isStart()" ng-click="today()">Today</button>
   <div ng-hide="isStart()">
     <button type="button" class="btn btn-sm btn-default" ng-click="nweeks(1)">one</button>
