@@ -1,16 +1,22 @@
-<div>
+<div class="well span5">
+  <h4><strong>{{datetype | capitalize}}</strong> date of the assignment</h4>
 
-  <h4>{{datetype | capitalize}} date</h4>
   <div class="row">
       <div class="col-md-6">
           <p class="input-group">
-            <input type="text" class="form-control" datepicker-popup="{{dp.format}}" ng-model="dp.dt" is-open="dp.opened" min-date="dp.minDate" max-date="'2015-06-22'" datepicker-options="dp.dateOptions" date-disabled="dp.disabled(date, mode)" ng-required="true" close-text="Close" />
+            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-change="updateSchedule()"/>
             <span class="input-group-btn">
-              <button type="button" class="btn btn-default" ng-click="dp.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
           </p>
       </div>
   </div>
   <hr />
-  <button type="button" class="btn btn-sm btn-info" ng-click="dp.today()">Today</button>
+  <button type="button" class="btn btn-sm btn-info" ng-show="isStart()" ng-click="today()">Today</button>
+  <div ng-hide="isStart()">
+    <button type="button" class="btn btn-sm btn-default" ng-click="nweeks(1)">one</button>
+    <button type="button" class="btn btn-sm btn-default" ng-click="nweeks(2)">two</button>
+    <button type="button" class="btn btn-sm btn-default" ng-click="nweeks(3)">three</button>
+    weeks time
+  <div>
 </div>

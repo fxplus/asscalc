@@ -1,49 +1,56 @@
 
   var app = angular.module('asscalc', ['ui.bootstrap']);
 
-  app.controller("HelloWorldCtrl", function () {
-    this.message = 'Hello World';
-  });
-
-  app.controller("FooBarCtrl", function () {
-    this.bar = 'bar';
-  });
-
   app.controller("DatepickerCtrl", function ($scope) {
-    this.today = function() {
-      this.dt = new Date();
+    $scope.today = function() {
+      $scope.dt = new Date();
     };
-    this.nweeks = function(n) {
+    $scope.nweeks = function(n) {
       today = new Date();
-      this.dt = new Date(today.getTime() + n * 7 * 24 * 60 * 60 * 1000);
+      $scope.dt = new Date(today.getTime() + n * 7 * 24 * 60 * 60 * 1000);
     };
-    if ($scope.datetype == 'start') { this.today();}
-    else { this.nweeks(4); }
-
-    this.clear = function () {
-      this.dt = null;
+    $scope.isStart = function() {
+      return (($scope.datetype == 'start') ? true : false);
     };
-    // Disable weekend selection
-    this.disabled = function(date, mode) {
-      return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+    $scope.clear = function () {
+      $scope.dt = null;
     };
-    // minimum date today?
-    this.toggleMin = function() {
-      this.minDate = this.minDate ? null : new Date();
+    $scope.updateSchedule = function () {
+      (($scope.isStart()) ? $scope.$parent.startdate = $scope.dt : $scope.$parent.enddate = $scope.dt );
     };
-    this.toggleMin();
-    this.open = function($event) {
+    // // Disable weekend selection
+    // $scope.disabled = function(date, mode) {
+    //   return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+    // };
+    // minimum date today
+    $scope.toggleMin = function() {
+      $scope.minDate = $scope.minDate ? null : new Date();
+    };
+    $scope.toggleMin();
+    $scope.open = function($event) {
       $event.preventDefault();
       $event.stopPropagation();
-      this.opened = true;
+      $scope.opened = true;
     };
-    this.dateOptions = {
+    $scope.dateOptions = {
       formatYear: 'yy',
       startingDay: 1
     };
-    this.initDate = new Date('2016-15-20');
-    this.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-    this.format = this.formats[0];
+    if ( $scope.datetype == 'start' ) { $scope.today(); $scope.$parent.startdate = $scope.dt;}
+    else { $scope.nweeks(4); }
+    // $scope.initDate = new Date('2016-15-20');
+    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    $scope.format = $scope.formats[0];
+  });
+  
+  app.controller("ScheduleCtrl", function () {
+    this.startdate = false;
+    this.enddate = true;
+    this.datescollected = false;
+    this.createschedule = function() {
+      console.log('create a schedule');
+      this.datescollected = true;
+    }
   });
 
   app.directive("assignmentDate", function() {
@@ -68,34 +75,3 @@
      return input.substring(0,1).toUpperCase()+input.substring(1);
    }
   });
-  // var DatepickerCtrl = function ($scope) {
-  //   $scope.today = function() {
-  //     $scope.dt = new Date();
-  //   };
-  //   $scope.today();
-  //   $scope.clear = function () {
-  //     $scope.dt = null;
-  //   };
-  //   // Disable weekend selection
-  //   $scope.disabled = function(date, mode) {
-  //     return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-  //   };
-  //   // minimum date today?
-  //   $scope.toggleMin = function() {
-  //     $scope.minDate = $scope.minDate ? null : new Date();
-  //   };
-  //   $scope.toggleMin();
-  //   $scope.open = function($event) {
-  //     $event.preventDefault();
-  //     $event.stopPropagation();
-
-  //     $scope.opened = true;
-  //   };
-  //   $scope.dateOptions = {
-  //     formatYear: 'yy',
-  //     startingDay: 1
-  //   };
-  //   $scope.initDate = new Date('2016-15-20');
-  //   $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  //   $scope.format = $scope.formats[0];
-  // };

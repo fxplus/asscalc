@@ -8,7 +8,17 @@
     <script src="js/asscalc.js"></script>
   </head>
   <body ng-app="asscalc">
-    <assignment-date datetype="start"></assignment-date>
-    <assignment-date datetype="end"></assignment-date>
+    <div ng-controller="ScheduleCtrl as sched" >
+      <form ng-submit="sched.createschedule()" ng-hide="sched.datescollected">
+        <assignment-date datetype="start"></assignment-date>
+        <assignment-date datetype="end" required></assignment-date>
+
+        <input type="submit" class="btn btn-primary pull-right" value="Create Schedule" />
+      </form>
+      <div ng-show="sched.datescollected">
+        <h1>Start: {{ startdate }}</h1>
+        <h1>End: {{ enddate }}</h1>
+      </div>
+    <div>
   </body>
 </html>
