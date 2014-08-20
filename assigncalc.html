@@ -17,7 +17,14 @@
       <div ng-show="sched.datescollected">
         <h1>Assignment starts {{ startdate | date }}</h1>
 
-
+          <div ng-repeat="task in sched.tasks">
+            <h2>{{ task.title }}</h2>
+            <div ng-repeat="section in task.sections">
+              <h3>{{ section.title }}</h3>
+              <p>{{ section.description }}</p>
+  
+            </div>
+          </div>
 
         <h1>Deadline {{ enddate | date }}</h1>
       </div>

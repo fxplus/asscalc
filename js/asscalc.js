@@ -44,14 +44,30 @@
     $scope.format = $scope.formats[0];
   });
   
-  app.controller("ScheduleCtrl", function () {
+  app.controller("ScheduleCtrl", function ($scope, $http, $log) {
+    // initialise
     this.startdate = null;
     this.enddate = null;
     this.datescollected = false;
+    var schedule = this; // to use within $http
+    this.tasks = [];
+    this.totalduration = 0;  
+    // get tasks (json)
+    $http.get('tasks.json').success(function(data) {
+      schedule.tasks = data;
+      log = [];
+      angular.forEach(schedule.tasks, function(task) {
+        schedule.totalduration += task.duration;
+      }, log);
+      
+    });
     this.createschedule = function() {
       console.log('create a schedule');
       this.datescollected = true;
+      console.log(this.totalduration);
+      console.log(this.tasks);
     }
+
   });
 
   app.directive("assignmentDate", function() {

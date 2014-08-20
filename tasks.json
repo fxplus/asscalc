@@ -1,0 +1,73 @@
+[
+  {
+    "title":"Planning",
+    "duration": 5,
+    "sections":
+      [
+        {
+          "title": "Understand the assignment",
+          "description": "It is always worth spending some time considering...",
+          "links": [
+            {
+              "linktext": "Understanding the essay brief",
+              "linkurl": "http://ask.fxplus.ac.uk/sites/default/files/public/Understanding%20the%20brief.pdf"
+            },
+            {
+              "text": "Assignment types",
+              "url": "http://ask.fxplus.ac.uk/ask/students/academic-writing/planning/assignment-types"
+            }
+          ]
+        },
+        {
+          "title": "Generate ideas",
+          "description": "It is always worth spending some time considering...",
+          "links": [
+            {
+              "text": "Understanding the essay brief",
+              "url": "http://ask.fxplus.ac.uk/sites/default/files/public/Understanding%20the%20brief.pdf"
+            },
+            {
+              "text": "Assignment types",
+              "url": "http://ask.fxplus.ac.uk/ask/students/academic-writing/planning/assignment-types"
+            }
+          ]
+        }
+      ]
+  },
+  {
+    "title":"Research",
+    "duration": 5,
+    "sections":
+      [
+        {
+          "title": "Understand the assignment",
+          "description": "It is always worth spending some time considering...",
+          "links": [
+            {
+              "text": "Understanding the essay brief",
+              "url": "http://ask.fxplus.ac.uk/sites/default/files/public/Understanding%20the%20brief.pdf"
+            },
+            {
+              "text": "Assignment types",
+              "url": "http://ask.fxplus.ac.uk/ask/students/academic-writing/planning/assignment-types"
+            }
+          ]
+        },
+        {
+          "title": "Generate ideas",
+          "description": "It is always worth spending some time considering...",
+          "links": [
+            {
+              "text": "Understanding the essay brief",
+              "url": "http://ask.fxplus.ac.uk/sites/default/files/public/Understanding%20the%20brief.pdf"
+            },
+            {
+              "text": "Assignment types",
+              "url": "http://ask.fxplus.ac.uk/ask/students/academic-writing/planning/assignment-types"
+            }
+          ]
+        }
+      ]
+  }
+]
+
