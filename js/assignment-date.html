@@ -1,8 +1,8 @@
-<div class="well span5">
+<div class="col-md-6 row datepicker">
   <h4><strong>{{datetype | capitalize}}</strong> date of the assignment</h4>
 
   <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-8">
           <p class="input-group">
             <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-change="updateSchedule()" novalidate required/>
             <span class="input-group-btn">

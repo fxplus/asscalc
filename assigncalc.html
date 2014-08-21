@@ -6,6 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.min.js"></script>
     <script src="js/ui-bootstrap-tpls-0.11.0.min.js"></script>
     <script src="js/asscalc.js"></script>
+    <link rel="stylesheet" href="css/asscalc.css">
   </head>
   <body ng-app="asscalc">
     <div ng-controller="ScheduleCtrl as sched" class="container">
@@ -15,30 +16,38 @@
 
         <p>Enter the start and end dates for your assignment below and this tool will give you a simple breakdown of the assignment into sections, with a suggested completion date for each, and some useful resources to help with various aspects of an assignment.</p>
 
-        <assignment-date datetype="start" ></assignment-date>
+        <assignment-date datetype="start"></assignment-date>
         <assignment-date datetype="end" ></assignment-date>
-        <input type="submit" class="btn btn-primary pull-right" value="Create Schedule" />
+        <input type="submit" class="btn btn-primary pull-left btn-lg" value="Create Schedule" />
       </form>
 
       <section ng-show="datescollected">
+        <span class="pull-right"><em>Bookmark this page</em></span>
         <h1>Assignment Schedule</h1>
+        <button class="btn btn-default pull-right" ng-click="clearDates()">Start Again</button>
         <h2>Assignment starts <em>{{ startdate | date }}</em></h2>
 
-          <div ng-repeat="task in tasks">
-            <div class="task-{{task.number}} well">
-              <h3>{{ task.title }} - {{ task.date| date }}</h3>
-              <div ng-repeat="section in task.sections">
-                
-                <h4>{{ section.title }}</h4>
-                <p>{{ section.description }}</p>
-                <ul>
-                  <li ng-repeat="link in section.links"><a href="{{ link.url }}">{{ link.title }}</a></li>
-                </ul>
+            <div class="task task-{{ $index }} well" ng-repeat="task in tasks">
+              <div ng-click="task.isCollapsed = !task.isCollapsed">
+                <h3>
+                  <span  ng-class="{'glyphicon-chevron-right':task.isCollapsed, 'glyphicon-chevron-down':!task.isCollapsed}" class="glyphicon"></span>
+                  <a>{{ task.title }}</a>
+                  <a class="date pull-right">{{ task.date|date }}</a>
+                </h3>   
+              </div>
+              <div class="task-sections" collapse="task.isCollapsed">
+                <div ng-repeat="section in task.sections" class="task-section">
+                  
+                  <h4>{{ section.title }}</h4>
+                  <p>{{ section.description }}</p>
+                  <ul>
+                    <li ng-repeat="link in section.links"><a href="{{ link.url }}">{{ link.title }}</a></li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
 
-        <h1 class="deadline">Deadline {{ enddate | date }}</h1>
+        <h1 class="deadline">Deadline <em>{{ enddate | date }}<em></h1>
       </section>
     <div>
   </body>

@@ -46,16 +46,49 @@
     $scope.format = $scope.formats[0];
   });
   
-  app.controller("ScheduleCtrl", function ($scope, $http, $log) {
+  app.controller("ScheduleCtrl", function ($scope, $http, $log, $location) {
     // initialise
     $scope.startdate = null;
     $scope.enddate = null;
     $scope.datescollected = false;
     $scope.tasks = [];
-    $scope.totalrelativeduration = 0;  
+    $scope.totalrelativeduration = 0;
     $scope.duration = 0;
     $scope.starttime = 0;
     $scope.endtime = 0;
+    query = $location.search();
+
+    $scope.createschedule = function() {
+      $scope.datescollected = true;
+      $scope.starttime = (!$scope.starttime)? $scope.startdate.getTime(): $scope.starttime;
+      $scope.endtime = (!$scope.endtime)? $scope.enddate.getTime(): $scope.endtime;
+      $location.search('start', $scope.starttime);
+      $location.search('end', $scope.endtime);
+      $scope.duration = $scope.endtime - $scope.starttime;
+      timeunit = $scope.duration / $scope.totalrelativeduration;
+      log = [];
+      timelapsed = 0;
+      angular.forEach($scope.tasks, function(task) {
+        tasktime = task.relativeduration * timeunit;
+        task.date = new Date($scope.starttime + timelapsed);
+        console.log(task.date);
+        timelapsed += tasktime;
+      }, log);
+    }
+    $scope.clearDates = function() {
+      $location.search('start', null);
+      $location.search('end', null);
+      $scope.starttime = null;
+      $scope.endtime = null;
+      $scope.datescollected = false;
+    }
+
+
+    if (query.start && query.end) {
+      $scope.starttime = query.start;
+      $scope.endtime = query.end;
+      $scope.createschedule();
+    }
     // get tasks (json)
     var schedule = $scope; // to use within $http
     $http.get($jsonpath).success(function(data) {
@@ -63,26 +96,11 @@
       log = [];
       angular.forEach(schedule.tasks, function(task) {
         schedule.totalrelativeduration += task.relativeduration;
+        task.isCollapsed = 1;
       }, log);
     });
+    console.log($location.search());
 
-    $scope.createschedule = function() {
-      $scope.datescollected = true;
-      $scope.starttime = $scope.startdate.getTime();
-      $scope.endtime = $scope.enddate.getTime();
-      $scope.duration = $scope.endtime - $scope.starttime;
-      timeunit = $scope.duration / $scope.totalrelativeduration;
-      log = [];
-      timelapsed = 0;
-      number = 1;
-      angular.forEach($scope.tasks, function(task) {
-        tasktime = task.relativeduration * timeunit;
-        task.date = new Date($scope.starttime + timelapsed);
-        timelapsed += tasktime;
-        task.number = number;
-        number ++;
-      }, log);
-    }
 
   });
 
