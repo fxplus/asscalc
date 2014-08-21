@@ -1,0 +1,72 @@
+h1, h2, h3 {
+  margin-bottom: 1em;
+  margin-top: 1.2em;
+}
+p {
+  margin-bottom: 1em;
+}
+.datepicker {
+  margin-top: 32px;
+  margin-bottom: 64px;
+}
+.task ul { 
+  padding-left: 1.2em;
+}
+.task ul li {
+  margin-bottom:0.5em;
+}
+.task h3 {
+  line-height:0;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  border: 0;
+  width: 100%;
+}
+.task h3 span.glyphicon {
+  font-size: 0.5em;
+  margin-right:1em;
+  color: #555;
+}
+.task-sections {
+  padding-bottom: 1em;
+}
+.task-section {
+  margin-top: 2em;
+  padding-top: 0.5em;
+  border-top: 1px dotted #666;
+}
+.task h3 a {
+  color: #333;
+  font-weight: normal;
+}
+.task h3 a:hover {
+  color: #fefefe;
+  text-decoration: none;
+}
+.task a {
+  color: white;
+}
+.task a.date {
+  text-align: right;
+  font-size: 0.8em;
+}
+.task-0 {
+  background-color: #14c85a;
+  /*background-color: #428bca;*/
+}
+.task-1 {
+  background-color: #1cbbb4;
+  /*background-color: #5cb85c;*/
+}
+.task-2 {
+  background-color: #F5B717;
+  /*background-color: #5bc0de;*/
+}
+.task-3 {
+  background-color: #f26d7d;
+  /*background-color: #f0ad4e;*/
+}
+.task-4 {
+  background-color: #f06eaa;
+  /*background-color: #d9534f;*/
+}
