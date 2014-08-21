@@ -12,7 +12,11 @@
       </div>
   </div>
   <hr/>
-  <button type="button" class="btn btn-sm btn-info" ng-show="isStart()" ng-click="today()">Today</button>
+  <div ng-show="isStart()">
+    <button type="button" class="btn btn-sm btn-default" ng-class="{active:!minDate}" ng-click="toggleMin()">I've already started</button>
+    <button type="button" class="btn btn-sm btn-info" ng-click="today()">Today</button>
+
+  </div>
   <div ng-hide="isStart()">
     <button type="button" class="btn btn-sm btn-default" ng-click="nweeks(1)">one</button>
     <button type="button" class="btn btn-sm btn-default" ng-click="nweeks(2)">two</button>

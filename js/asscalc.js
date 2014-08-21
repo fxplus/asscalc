@@ -1,6 +1,8 @@
 
   var app = angular.module('asscalc', ['ui.bootstrap']);
 
+  $jsonpath = 'services/tasks.json';
+
   app.controller("DatepickerCtrl", function ($scope) {
     $scope.today = function() {
       $scope.dt = new Date();
@@ -46,26 +48,40 @@
   
   app.controller("ScheduleCtrl", function ($scope, $http, $log) {
     // initialise
-    this.startdate = null;
-    this.enddate = null;
-    this.datescollected = false;
-    var schedule = this; // to use within $http
-    this.tasks = [];
-    this.totalduration = 0;  
+    $scope.startdate = null;
+    $scope.enddate = null;
+    $scope.datescollected = false;
+    $scope.tasks = [];
+    $scope.totalrelativeduration = 0;  
+    $scope.duration = 0;
+    $scope.starttime = 0;
+    $scope.endtime = 0;
     // get tasks (json)
-    $http.get('tasks.json').success(function(data) {
+    var schedule = $scope; // to use within $http
+    $http.get($jsonpath).success(function(data) {
       schedule.tasks = data;
       log = [];
       angular.forEach(schedule.tasks, function(task) {
-        schedule.totalduration += task.duration;
+        schedule.totalrelativeduration += task.relativeduration;
       }, log);
-      
     });
-    this.createschedule = function() {
-      console.log('create a schedule');
-      this.datescollected = true;
-      console.log(this.totalduration);
-      console.log(this.tasks);
+
+    $scope.createschedule = function() {
+      $scope.datescollected = true;
+      $scope.starttime = $scope.startdate.getTime();
+      $scope.endtime = $scope.enddate.getTime();
+      $scope.duration = $scope.endtime - $scope.starttime;
+      timeunit = $scope.duration / $scope.totalrelativeduration;
+      log = [];
+      timelapsed = 0;
+      number = 1;
+      angular.forEach($scope.tasks, function(task) {
+        tasktime = task.relativeduration * timeunit;
+        task.date = new Date($scope.starttime + timelapsed);
+        timelapsed += tasktime;
+        task.number = number;
+        number ++;
+      }, log);
     }
 
   });

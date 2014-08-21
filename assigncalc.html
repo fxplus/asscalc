@@ -8,28 +8,38 @@
     <script src="js/asscalc.js"></script>
   </head>
   <body ng-app="asscalc">
-    <div ng-controller="ScheduleCtrl as sched" >
-      <form name="scheduleForm" ng-submit="sched.createschedule()" ng-hide="sched.datescollected">
+    <div ng-controller="ScheduleCtrl as sched" class="container">
+          
+      <form name="scheduleForm" ng-submit="createschedule()" ng-hide="datescollected">
+        <h1>Assignment Calculator</h1>
+
+        <p>Enter the start and end dates for your assignment below and this tool will give you a simple breakdown of the assignment into sections, with a suggested completion date for each, and some useful resources to help with various aspects of an assignment.</p>
+
         <assignment-date datetype="start" ></assignment-date>
         <assignment-date datetype="end" ></assignment-date>
         <input type="submit" class="btn btn-primary pull-right" value="Create Schedule" />
       </form>
-      <div ng-show="sched.datescollected">
-        <h1>Assignment starts {{ startdate | date }}</h1>
 
-          <div ng-repeat="task in sched.tasks">
-            <h2>{{ task.title }}</h2>
-            <div ng-repeat="section in task.sections">
-              <h3>{{ section.title }}</h3>
-              <p>{{ section.description }}</p>
-              <div ng-repeat="link in section.links">
-                <li><a>{{ link.text }}</p>
+      <section ng-show="datescollected">
+        <h1>Assignment Schedule</h1>
+        <h2>Assignment starts <em>{{ startdate | date }}</em></h2>
+
+          <div ng-repeat="task in tasks">
+            <div class="task-{{task.number}} well">
+              <h3>{{ task.title }} - {{ task.date| date }}</h3>
+              <div ng-repeat="section in task.sections">
+                
+                <h4>{{ section.title }}</h4>
+                <p>{{ section.description }}</p>
+                <ul>
+                  <li ng-repeat="link in section.links"><a href="{{ link.url }}">{{ link.title }}</a></li>
+                </ul>
               </div>
             </div>
           </div>
 
-        <h1>Deadline {{ enddate | date }}</h1>
-      </div>
+        <h1 class="deadline">Deadline {{ enddate | date }}</h1>
+      </section>
     <div>
   </body>
 </html>
