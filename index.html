@@ -10,9 +10,17 @@
     <script src="js/ui-bootstrap-tpls-0.11.0.min.js"></script>
     <script src="js/asscalc.js"></script>
     <link rel="stylesheet" href="css/asscalc.css">
-
+    <!--[if lte IE 9]>
+      <link rel="stylesheet" type="text/css" href="css/ie-only.css">
+    <![endif]-->
   </head>
   <body ng-app="asscalc">
+    <div class="ie-notice">
+      <h1>Extremely old browser</h1>
+      <p>Sorry, this web browser is quite a long way out of date, and will not allow the assignment calculator to run.</p>
+      <p>Try a new version of <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a> or <a href="https://www.google.com/chrome/browser/">Google Chrome</a>, or if you really have to use Internet Explorer then versions 10 and upwards should work fine.</p>
+      <p><em style="font-size: 0.8em;">If this is an institutional machine that you cannot update yourself, check for another browser, and please let the institution know it needs updating.</em></p>
+    </div>
     <div ng-controller="ScheduleCtrl as sched" class="container">
           
       <form name="scheduleForm" ng-submit="createschedule()" ng-hide="datescollected">

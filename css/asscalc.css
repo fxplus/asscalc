@@ -5,6 +5,9 @@ h1, h2, h3 {
   margin-bottom: 1em;
   margin-top: 1.2em;
 }
+.ie-notice {
+  display: none;
+}
 p {
   margin-bottom: 1em;
 }

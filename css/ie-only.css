@@ -1,0 +1,16 @@
+.ie-notice {
+    display:block;
+    width: 500px;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    margin-top: -25px;
+    margin-left: -250px;
+    padding: 40px;
+    background-color: white;
+    border: 1px solid #ccc;
+}
+.container {
+    display:none;
+}
+body {background-color: #ddd;}
